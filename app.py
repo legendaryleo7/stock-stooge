@@ -131,7 +131,7 @@ Provide a concise analysis (2-3 paragraphs) with:
                                             model="gpt-5-mini",
                                             reasoning_effort="medium",
                                             messages=[{"role": "user", "content": prompt}],
-                                            max_completion_tokens=4000
+                                            max_completion_tokens=10000
                                         )
                                         
                                         analysis = response.choices[0].message.content
