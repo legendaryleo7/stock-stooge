@@ -11,11 +11,23 @@ st.set_page_config(page_title="Stock Stooge", page_icon="📈", layout="wide")
 st.title("📈 Stonk News")
 st.markdown("Enter stock tickers to view price history, news, and AI analysis")
 
+# Initialize session state for API keys
+if "tavily_key" not in st.session_state:
+    st.session_state.tavily_key = os.getenv("TAVILY_API_KEY", "")
+if "openai_key" not in st.session_state:
+    st.session_state.openai_key = os.getenv("OPENAI_API_KEY", "")
+
 # Sidebar for API keys
 with st.sidebar:
     st.header("API Configuration")
-    tavily_key = st.text_input("Tavily API Key", value=os.getenv("TAVILY_API_KEY", ""), type="password")
-    openai_key = st.text_input("OpenAI API Key", value=os.getenv("OPENAI_API_KEY", ""), type="password")
+    tavily_key = st.text_input("Tavily API Key", value=st.session_state.tavily_key, type="password", key="tavily_input")
+    openai_key = st.text_input("OpenAI API Key", value=st.session_state.openai_key, type="password", key="openai_input")
+    
+    # Update session state when keys change
+    if tavily_key != st.session_state.tavily_key:
+        st.session_state.tavily_key = tavily_key
+    if openai_key != st.session_state.openai_key:
+        st.session_state.openai_key = openai_key
     
     st.header("Settings")
     period = st.selectbox("Price History Period", ["1mo", "3mo", "6mo", "1y", "2y", "5y"], index=2)
