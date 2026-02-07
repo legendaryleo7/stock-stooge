@@ -30,7 +30,7 @@ with st.sidebar:
         st.session_state.openai_key = openai_key
     
     st.header("Settings")
-    period = st.selectbox("Price History Period", ["1mo", "3mo", "6mo", "1y", "2y", "5y"], index=2)
+    period = st.selectbox("Price History Period", ["1mo", "3mo", "6mo", "1y", "2y", "5y"], index=0)
 
 # Main input
 tickers_input = st.text_input("Enter stock ticker(s) separated by commas", placeholder="AAPL, MSFT, GOOGL")
@@ -131,7 +131,7 @@ Provide a concise analysis (2-3 paragraphs) with:
                                             model="gpt-5-mini",
                                             reasoning_effort="medium",
                                             messages=[{"role": "user", "content": prompt}],
-                                            max_completion_tokens=500
+                                            max_completion_tokens=4000
                                         )
                                         
                                         analysis = response.choices[0].message.content
