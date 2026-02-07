@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 st.set_page_config(page_title="Stock Stooge", page_icon="📈", layout="wide")
-st.title("📈 Stock Stooge")
+st.title("📈 Stonk News")
 st.markdown("Enter stock tickers to view price history, news, and AI analysis")
 
 # Sidebar for API keys
@@ -119,7 +119,7 @@ Provide a concise analysis (2-3 paragraphs) with:
                                             model="gpt-5-mini",
                                             reasoning_effort="medium",
                                             messages=[{"role": "user", "content": prompt}],
-                                            max_tokens=500
+                                            max_completion_tokens=500
                                         )
                                         
                                         analysis = response.choices[0].message.content
